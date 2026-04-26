@@ -39,4 +39,4 @@ No external StoatChat instance is contacted. Everything runs on localhost throug
 
 ## GitHub Actions
 
-The workflow in `.github/workflows/repro.yml` runs the same local Docker Compose stack on a GitHub-hosted runner, executes the PoC, prints the result in the job log, and uploads `out/result.json` as an artifact.
+The workflow in `.github/workflows/repro.yml` runs the same local Docker Compose stack on a GitHub-hosted runner, executes the PoC, and prints the result in the job log and job summary.
