@@ -1,0 +1,55 @@
+production = false
+disable_events_dont_use = true
+
+[database]
+mongodb = "mongodb://database"
+redis = "redis://redis/"
+
+[hosts]
+app = "http://127.0.0.1:18180"
+api = "http://127.0.0.1:18182"
+events = "ws://127.0.0.1:18183"
+autumn = "http://127.0.0.1:18184"
+january = "http://127.0.0.1:18185"
+voso_legacy = ""
+voso_legacy_ws = ""
+
+[rabbit]
+host = "rabbit"
+port = 5672
+username = "rabbituser"
+password = "rabbitpass"
+
+[api.registration]
+invite_only = false
+
+[api.smtp]
+host = ""
+username = ""
+password = ""
+from_address = "noreply@example.invalid"
+
+[api.security]
+authifier_shield_key = ""
+voso_legacy_token = ""
+trust_cloudflare = false
+easypwned = ""
+tenor_key = ""
+
+[api.security.captcha]
+hcaptcha_key = ""
+hcaptcha_sitekey = ""
+
+[files]
+encryption_key = "qcuMA+ssxhMyKaNAKBGFfryfFtUH8NDlamQyDwGW6fU="
+clamd_host = ""
+blocked_mime_types = []
+scan_mime_types = []
+
+[files.s3]
+endpoint = "http://minio:9000"
+path_style_buckets = true
+region = "minio"
+access_key_id = "minioautumn"
+secret_access_key = "minioautumn"
+default_bucket = "revolt-uploads"

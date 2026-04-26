@@ -1,0 +1,61 @@
+name: Reproduce attachment URL behavior
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Start local StoatChat stack
+        run: docker compose up -d
+
+      - name: Show local stack
+        run: docker compose ps
+
+      - name: Run local PoC
+        run: |
+          mkdir -p out
+          python3 scripts/repro.py | tee out/repro.log
+
+      - name: Summarize result
+        if: always()
+        run: |
+          if [ -f out/result.json ]; then
+            {
+              echo "## StoatChat attachment URL PoC"
+              echo
+              echo '```json'
+              python3 -m json.tool out/result.json
+              echo '```'
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload PoC result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stoat-attachment-poc-result
+          path: |
+            out/result.json
+            out/repro.log
+          if-no-files-found: ignore
+
+      - name: Dump compose logs on failure
+        if: failure()
+        run: docker compose logs --no-color --tail=300
+
+      - name: Stop local stack
+        if: always()
+        run: docker compose down -v
