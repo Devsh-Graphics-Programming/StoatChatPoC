@@ -40,3 +40,13 @@ No external StoatChat instance is contacted. Everything runs on localhost throug
 ## GitHub Actions
 
 The workflow in `.github/workflows/repro.yml` runs the same local Docker Compose stack on a GitHub-hosted runner, executes the PoC, and prints the result in the job log and job summary.
+
+## Upstream status
+
+Timeline:
+
+- 2026-04-26: opened upstream issue https://github.com/stoatchat/stoatchat/issues/728 with this local PoC.
+- 2026-04-26: upstream confirmed the bulk message deletion attachment cleanup as a bug.
+- 2026-04-27: upstream closed the issue as completed, but this repro still tracks the unresolved private attachment URL access model and bulk-delete attachment revocation behavior.
+
+This section will be updated when upstream ships a fix or changes the attachment access model.
